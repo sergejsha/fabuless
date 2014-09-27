@@ -84,6 +84,13 @@ Other attributes
   * to change icon's position you can use `android:paddingTop` attribute etc.
 
 
+More details
+=======
+
+  * Click animation only works when `OnClickListener` is set to the view
+  * Method `setBackgroundDrawable()` method supports `ColorDrawable` only
+
+
 License
 =======
 
