@@ -72,7 +72,7 @@ FabView attributes
 | `fab_attachAt` | - | `top_right` | Attachment position (`top_left`, `top_right`, `bottom_left`, `bottom_right`).
 | `fab_size` | - | `normal` | Fab size (`normal`, `small`).
 | `fab_padding` | - | 16dp | Padding to the closest left or right border of target view.
-| `fab_revealAfterMs` | - | Show immediately | When set, fab will berevealed with animation after specified timeout in milliseconds.
+| `fab_revealAfterMs` | - | Show immediately | When set, fab will be revealed with animation after a specified timeout in milliseconds.
 
 
 Other attributes
