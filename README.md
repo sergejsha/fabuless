@@ -19,9 +19,9 @@ Usage example
 
   To attach a FabView to your target view, you need to do the following.
 
-  1. Wrap target view with ```FrameLayout```.
-  2. Add ```com.halfbit.fabview.FabView``` as the last child of that ```FrameLayout```.
-  3. Configure size and location of added ```FabView```.
+  1. Wrap target view with `FrameLayout`.
+  2. Add `com.halfbit.fabview.FabView` as the last child of that `FrameLayout`.
+  3. Configure size and location of added `FabView`.
   
   That's it. Here is an example.
 
@@ -68,7 +68,7 @@ FabView attributes
 
 | Attribute | Required | Default | Description
 | --------- | :------: | ------- | -----------
-| `fab_attachTo` | X | - | Id of target view.
+| `fab_attachTo` | X | - | `Id` of target view.
 | `fab_attachAt` | - | `top_right` | Attachment position (`top_left`, `top_right`, `bottom_left`, `bottom_right`).
 | `fab_size` | - | `normal` | Fab size (`normal`, `small`).
 | `fab_padding` | - | 16dp | Padding to the closest left or right border of target view.
