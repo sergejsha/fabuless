@@ -12,7 +12,7 @@ Features
  - Can be attached to any view in layout
  - Automatically caclulatable attachment position
  - Two fab sizes ('normal' and 'small')
- - Nice 'reveal' and 'touch' animations
+ - Nice reveal and touch animations
 
 Usage example
 =======
