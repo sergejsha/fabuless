@@ -1,7 +1,7 @@
 Fabuless
 ========
 
-Fun to use Floating Action Button (FAB) view for Android
+Fun to use [Floating Action Button][2] (FAB) view for Android
 
 ![fab][1]
 
@@ -10,14 +10,14 @@ Features
 
  - Fully configurable via layout xml-file
  - Can be attached to any view in layout
- - Automatically caclulates attachment position
- - Supports two sizes (normal and small)
- - Provides nice 'reveal' and 'touch' animations
+ - Automatically caclulatable attachment position
+ - Two fab sizes ('normal' and 'small')
+ - Nice 'reveal' and 'touch' animations
 
 Usage example
 =======
 
-  To attach a `FabView` to your target view, you need to do the following.
+  To attach a `FabView` to your target view, do the following.
 
   1. Wrap target view with a `FrameLayout`.
   2. Add `com.halfbit.fabview.FabView` as the last child of that `FrameLayout`.
@@ -110,3 +110,4 @@ License
 
 
 [1]: web/fab.gif
+[2]: http://www.google.com/design/spec/patterns/promoted-actions.html#promoted-actions-floating-action-button
