@@ -1,7 +1,7 @@
 Fabuless
 ========
 
-Fun to use [Floating Action Button][2] (FAB) view for Android
+Fun to use [Floating Action Button][2] (FAB) view for Android 4.0 and higher.
 
 ![fab][1]
 
