@@ -289,16 +289,12 @@ public class FabView extends ImageView {
 		
 		private final int mTargetRadius;
 		private final int mTouchSpotColor;
-		private final int mAlphaOpaque;
-		private final int mAlphaTransparent;
 		
 		private int mTouchSpotRadius = 0;
 		private ValueAnimator mTouchSpotAnimator;
 
 		public TouchSpotAnimator() {
 			mTouchSpotColor = 0x00000000;
-			mAlphaOpaque = 0x38;
-			mAlphaTransparent = 0x00;
 			mTouchSpotPaint.setColor(mTouchSpotColor);
 			mTouchSpotPaint.setStyle(Style.FILL);
 			mTargetRadius = mFabRadius * 5 / 3;
@@ -316,12 +312,8 @@ public class FabView extends ImageView {
 					mTouchPoint.x = event.getX();
 					mTouchPoint.y = event.getY();
 					break;
-					
 				case MotionEvent.ACTION_UP:
 					animate();
-					break;
-					
-				case MotionEvent.ACTION_CANCEL:
 					break;
 			}
 		}
@@ -355,7 +347,7 @@ public class FabView extends ImageView {
 		public void onAnimationUpdate(ValueAnimator animation) {
 			final float factor = animation.getAnimatedFraction();
 			mTouchSpotRadius = (int) (mTargetRadius * factor);
-			mTouchSpotPaint.setColor(transformAlpha(mTouchSpotColor, mAlphaTransparent, mAlphaOpaque, factor));
+			mTouchSpotPaint.setColor(transformAlpha(mTouchSpotColor, 0x00, 0x38, factor));
 			mBackgroundDrawable.getPaint().setColor(transformColor(mBackgroundColorDarker, mBackgroundColor, factor));
 			invalidate();
 		}
