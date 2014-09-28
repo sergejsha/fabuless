@@ -81,7 +81,7 @@ Other attributes
 `FabView` is an `ImageView`. You can use any `ImageView` attributes to achieve required look and feed. For instance 
   * to set an icon you can use `android:src` attribute
   * to change background color you can use `android:background` attribute
-  * to change icon's position you can use `android:paddingTop` attribute etc.
+  * to move icon down you can use `android:paddingTop` attribute etc.
 
 
 More details
