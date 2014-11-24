@@ -51,10 +51,14 @@ public class FabView extends ImageView {
 	private static final int NORMAL = 1;
 	private static final int SMALL = 2;
 	
+	private static final int BORDER = 1;
+	private static final int INSIDE = 2;
+	
 	protected final ShapeDrawable mBackgroundDrawable;
 	
 	protected final int mFabAttachTo;
 	protected final int mFabAttachAt;
+	protected final int mFabAttachType;
 	protected final int mFabSize;
 	protected final int mFabAttachPadding;
 	protected final int mFabRevealAfterMs;
@@ -91,6 +95,7 @@ public class FabView extends ImageView {
 		final TypedArray styles = context.obtainStyledAttributes(attrs, R.styleable.FabView, 0, 0);
 		mFabAttachTo = styles.getResourceId(R.styleable.FabView_fab_attachTo, 0);
 		mFabAttachAt = styles.getInt(R.styleable.FabView_fab_attachAt, TOP_RIGHT);
+		mFabAttachType = styles.getInt(R.styleable.FabView_fab_attachType, BORDER);
 		mFabSize = styles.getInt(R.styleable.FabView_fab_size, NORMAL);
 		mFabAttachPadding = (int) styles.getDimension(R.styleable.FabView_fab_padding, 16 * density);
 		mFabRevealAfterMs = styles.getInteger(R.styleable.FabView_fab_revealAfterMs, -1);
@@ -164,30 +169,66 @@ public class FabView extends ImageView {
 			
 			int transY, transX;
 			
-			switch (mFabAttachAt) {
-				case TOP_LEFT: {
-					transY = mAttachedToView.getTop() - getHeight() / 2;
-					transX = mAttachedToView.getLeft() + mFabAttachPadding - mShadowOffset;
-					break;
+			if (mFabAttachType == BORDER) {
+				
+				// put to border
+				switch (mFabAttachAt) {
+					case TOP_LEFT: {
+						transY = mAttachedToView.getTop() - getHeight() / 2;
+						transX = mAttachedToView.getLeft() + mFabAttachPadding - mShadowOffset;
+						break;
+					}
+					
+					case TOP_RIGHT: {
+						transY = mAttachedToView.getTop() - getHeight() / 2;
+						transX = mAttachedToView.getRight() - getWidth() - mFabAttachPadding + mShadowOffset;
+						break;
+					}
+					
+					case BOTTOM_LEFT: {
+						transY = mAttachedToView.getBottom() - getHeight() / 2;
+						transX = mAttachedToView.getLeft() + mFabAttachPadding - mShadowOffset;
+						break;
+					}
+					
+					case BOTTOM_RIGHT: default: {
+						transY = mAttachedToView.getBottom() - getHeight() / 2;
+						transX = mAttachedToView.getRight() - getWidth() - mFabAttachPadding + mShadowOffset;
+						break;
+					}
 				}
 				
-				case TOP_RIGHT: {
-					transY = mAttachedToView.getTop() - getHeight() / 2;
-					transX = mAttachedToView.getRight() - getWidth() - mFabAttachPadding + mShadowOffset;
-					break;
+			} else if (mFabAttachType == INSIDE) {
+				
+				// put inside
+				switch (mFabAttachAt) {
+					case TOP_LEFT: {
+						transY = mAttachedToView.getTop() + mFabAttachPadding - mShadowOffset;
+						transX = mAttachedToView.getLeft() + mFabAttachPadding - mShadowOffset;
+						break;
+					}
+					
+					case TOP_RIGHT: {
+						transY = mAttachedToView.getTop() + mFabAttachPadding - mShadowOffset;
+						transX = mAttachedToView.getRight() - getHeight() - mFabAttachPadding + mShadowOffset;
+						break;
+					}
+					
+					case BOTTOM_LEFT: {
+						transY = mAttachedToView.getBottom() - getHeight() - mFabAttachPadding + mShadowOffset;
+						transX = mAttachedToView.getLeft() + mFabAttachPadding - mShadowOffset;
+						break;
+					}
+					
+					case BOTTOM_RIGHT: default: {
+						transY = mAttachedToView.getBottom() - getHeight() - mFabAttachPadding + mShadowOffset;
+						transX = mAttachedToView.getRight() - getHeight() - mFabAttachPadding + mShadowOffset;
+						break;
+					}
 				}
 				
-				case BOTTOM_LEFT: {
-					transY = mAttachedToView.getBottom() - getHeight() / 2;
-					transX = mAttachedToView.getLeft() + mFabAttachPadding - mShadowOffset;
-					break;
-				}
-				
-				case BOTTOM_RIGHT: default: {
-					transY = mAttachedToView.getBottom() - getHeight() / 2;
-					transX = mAttachedToView.getRight() - getWidth() - mFabAttachPadding + mShadowOffset;
-					break;
-				}
+			} else {
+				throw new IllegalArgumentException("unsupported attachType: " + mFabAttachType);
 			}
 			
 			setY(transY);

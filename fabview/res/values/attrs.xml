@@ -10,6 +10,10 @@
 	        <enum name="bottom_left" value="3" />
 	        <enum name="bottom_right" value="4" />
         </attr>
+        <attr name="fab_attachType" format="enum">
+	        <enum name="border" value="1" />
+	        <enum name="inside" value="2" />
+        </attr>
         <attr name="fab_size" format="enum">
 	        <enum name="normal" value="1" />
 	        <enum name="small" value="2" />

@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fabview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <FrameLayout
         android:id="@+id/fab_target"
@@ -20,6 +20,7 @@
         android:src="@drawable/ic_favorite"
         fabview:fab_attachTo="@id/fab_target"
         fabview:fab_attachAt="bottom_right"
+        fabview:fab_attachType="border"
         fabview:fab_size="normal"
         fabview:fab_padding="16dp"
         fabview:fab_revealAfterMs="300"
