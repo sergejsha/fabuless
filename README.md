@@ -70,7 +70,7 @@ FabView attributes
 | --------- | :------: | ------- | -----------
 | `fab_attachTo` | X | - | `Id` of target view.
 | `fab_attachAt` | - | `top_right` | Attachment position (`top_left`, `top_right`, `bottom_left`, `bottom_right`).
-| `fab_attachType` | - | `border` | Defines whether the button resides inside (`inside`) parent or on its borders (`border`).
+| `fab_attachType` | - | `border` | Defines whether the button resides inside (`inside`) parent container or it gets attached to parent's borders (`border`).
 | `fab_size` | - | `normal` | Fab size (`normal`, `small`).
 | `fab_padding` | - | 16dp | Padding to the closest left or right border of target view.
 | `fab_revealAfterMs` | - | Show immediately | When set, fab will be revealed with animation after a specified timeout in milliseconds.
