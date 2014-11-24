@@ -55,6 +55,7 @@ Usage example
         android:src="@drawable/ic_favorite"
         fabview:fab_attachTo="@id/fab_target"
         fabview:fab_attachAt="bottom_right"
+        fabview:fab_attachType="border"
         fabview:fab_size="normal"
         fabview:fab_padding="16dp"
         fabview:fab_revealAfterMs="300"
