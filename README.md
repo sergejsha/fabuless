@@ -20,7 +20,7 @@ Usage example
   To attach a `FabView` to your target view, do the following.
 
   1. Wrap target view with a `FrameLayout`.
-  2. Add `com.halfbit.fabview.FabView` as the last child of that `FrameLayout`.
+  2. Add `de.halfbit.fabview.FabView` as the last child of that `FrameLayout`.
   3. Configure size, location, color and icon of `FabView`.
   
   That's it. Here is an example.
