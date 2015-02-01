@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.halfbit.fabview;
+package de.halfbit.fabview;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -266,7 +266,7 @@ public class FabView extends ImageView {
 			ColorDrawable cd = (ColorDrawable) background;
 			setBackgroundColor(cd.getColor());
 		} else {
-			throw new UnsupportedOperationException("only color drawable are supported for now");
+			throw new UnsupportedOperationException("only color drawables are supported for now");
 		}
 	}
 	
