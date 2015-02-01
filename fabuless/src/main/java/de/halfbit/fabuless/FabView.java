@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.halfbit.fabview;
+package de.halfbit.fabuless;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -93,12 +93,12 @@ public class FabView extends ImageView {
 		final float density = getResources().getDisplayMetrics().density;
 		
 		final TypedArray styles = context.obtainStyledAttributes(attrs, R.styleable.FabView, 0, 0);
-		mFabAttachTo = styles.getResourceId(R.styleable.FabView_fab_attachTo, 0);
-		mFabAttachAt = styles.getInt(R.styleable.FabView_fab_attachAt, TOP_RIGHT);
-		mFabAttachType = styles.getInt(R.styleable.FabView_fab_attachType, BORDER);
-		mFabSize = styles.getInt(R.styleable.FabView_fab_size, NORMAL);
-		mFabAttachPadding = (int) styles.getDimension(R.styleable.FabView_fab_padding, 16 * density);
-		mFabRevealAfterMs = styles.getInteger(R.styleable.FabView_fab_revealAfterMs, -1);
+		mFabAttachTo = styles.getResourceId(R.styleable.FabView_fabuless_attachTo, 0);
+		mFabAttachAt = styles.getInt(R.styleable.FabView_fabuless_attachAt, TOP_RIGHT);
+		mFabAttachType = styles.getInt(R.styleable.FabView_fabuless_attachType, BORDER);
+		mFabSize = styles.getInt(R.styleable.FabView_fabuless_size, NORMAL);
+		mFabAttachPadding = (int) styles.getDimension(R.styleable.FabView_fabuless_padding, 16 * density);
+		mFabRevealAfterMs = styles.getInteger(R.styleable.FabView_fabuless_revealAfterMs, -1);
 		styles.recycle();
 		
 		switch (mFabSize) {

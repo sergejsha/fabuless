@@ -11,19 +11,19 @@
 	    android:background="@color/color1"
         />
         
-    <com.halfbit.fabview.FabView 
+    <de.halfbit.fabuless.FabView 
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/color2"
         android:paddingTop="3dp"
         android:src="@drawable/ic_favorite"
-        fabview:fab_attachTo="@id/fab_target"
-        fabview:fab_attachAt="bottom_right"
-        fabview:fab_attachType="border"
-        fabview:fab_size="normal"
-        fabview:fab_padding="16dp"
-        fabview:fab_revealAfterMs="300"
+        fabview:fabuless_attachTo="@id/fab_target"
+        fabview:fabuless_attachAt="bottom_right"
+        fabview:fabuless_attachType="border"
+        fabview:fabuless_size="normal"
+        fabview:fabuless_padding="16dp"
+        fabview:fabuless_revealAfterMs="300"
         />
 
 </FrameLayout>
