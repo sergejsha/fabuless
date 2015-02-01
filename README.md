@@ -46,7 +46,7 @@ Usage example
     </RelativeLayout>
     
     <!-- This is our FabView -->
-    <com.halfbit.fabview.FabView 
+    <de.halfbit.fabview.FabView 
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
