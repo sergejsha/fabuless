@@ -20,7 +20,7 @@ Usage example
   To attach a `FabView` to your target view, do the following.
 
   1. Wrap target view with a `FrameLayout`.
-  2. Add `de.halfbit.fabview.FabView` as the last child of that `FrameLayout`.
+  2. Add `de.halfbit.fabuless.FabView` as the last child of that `FrameLayout`.
   3. Configure size, location, color and icon of `FabView`.
   
   That's it. Here is an example.
@@ -46,19 +46,19 @@ Usage example
     </RelativeLayout>
     
     <!-- This is our FabView -->
-    <de.halfbit.fabview.FabView 
+    <de.halfbit.fabuless.FabView 
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/fab_color"
         android:paddingTop="3dp"
         android:src="@drawable/ic_favorite"
-        fabview:fab_attachTo="@id/fab_target"
-        fabview:fab_attachAt="bottom_right"
-        fabview:fab_attachType="border"
-        fabview:fab_size="normal"
-        fabview:fab_padding="16dp"
-        fabview:fab_revealAfterMs="300"
+        fabview:fabuless_attachTo="@id/fab_target"
+        fabview:fabuless_attachAt="bottom_right"
+        fabview:fabuless_attachType="border"
+        fabview:fabuless_size="normal"
+        fabview:fabuless_padding="16dp"
+        fabview:fabuless_revealAfterMs="300"
         />
 
 </FrameLayout>
@@ -69,12 +69,12 @@ FabView attributes
 
 | Attribute | Required | Default | Description
 | --------- | :------: | ------- | -----------
-| `fab_attachTo` | X | - | `Id` of target view.
-| `fab_attachAt` | - | `top_right` | Attachment position (`top_left`, `top_right`, `bottom_left`, `bottom_right`).
-| `fab_attachType` | - | `border` | Defines whether the button resides inside (`inside`) parent container or it gets attached to parent's borders (`border`).
-| `fab_size` | - | `normal` | Fab size (`normal`, `small`).
-| `fab_padding` | - | 16dp | Padding to the closest left or right border of target view.
-| `fab_revealAfterMs` | - | Show immediately | When set, fab will be revealed with animation after a specified timeout in milliseconds.
+| `fabuless_attachTo` | X | - | `Id` of target view.
+| `fabuless_attachAt` | - | `top_right` | Attachment position (`top_left`, `top_right`, `bottom_left`, `bottom_right`).
+| `fabuless_attachType` | - | `border` | Defines whether the button resides inside (`inside`) parent container or it gets attached to parent's borders (`border`).
+| `fabuless_size` | - | `normal` | Fab size (`normal`, `small`).
+| `fabuless_padding` | - | 16dp | Padding to the closest left or right border of target view.
+| `fabuless_revealAfterMs` | - | Show immediately | When set, fab will be revealed with animation after a specified timeout in milliseconds.
 
 
 Other attributes
@@ -96,7 +96,7 @@ More details
 License
 =======
 
-    Copyright (c) 2014 Sergej Shafarenka, halfbit.de
+    Copyright (c) 2014-2015 Sergej Shafarenka, halfbit.de
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
