@@ -19,6 +19,8 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -32,6 +34,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -54,14 +57,14 @@ public class FabView extends ImageView {
 	private static final int BORDER = 1;
 	private static final int INSIDE = 2;
 	
-	protected final ShapeDrawable mBackgroundDrawable;
+	protected ShapeDrawable mBackgroundDrawable;
 	
-	protected final int mFabAttachTo;
-	protected final int mFabAttachAt;
-	protected final int mFabAttachType;
-	protected final int mFabSize;
-	protected final int mFabAttachPadding;
-	protected final int mFabRevealAfterMs;
+	protected int mFabAttachTo;
+	protected int mFabAttachAt;
+	protected int mFabAttachType;
+	protected int mFabSize;
+	protected int mFabAttachPadding;
+	protected int mFabRevealAfterMs;
 	
 	protected int mBackgroundColor;
 	protected int mBackgroundColorDarker;
@@ -70,8 +73,8 @@ public class FabView extends ImageView {
 	
 	protected View mAttachedToView;
 	
-	private final FabRevealer mFabRevealer;
-	private final TouchSpotAnimator mTouchSpotAnimator;
+	private FabRevealer mFabRevealer;
+	private TouchSpotAnimator mTouchSpotAnimator;
 	
 	//-- constructors
 	
@@ -85,13 +88,23 @@ public class FabView extends ImageView {
 	
 	public FabView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		
+		initializeView(context, attrs);
+	}
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	public FabView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+		super(context, attrs, defStyleAttr, defStyleRes);
+		initializeView(context, attrs);
+	}
+
+	private void initializeView(Context context, AttributeSet attrs) {
+
 		setScaleType(ScaleType.CENTER_INSIDE);
-		
+
 		// http://www.google.com/design/spec/patterns/promoted-actions.html#promoted-actions-floating-action-button
-		
+
 		final float density = getResources().getDisplayMetrics().density;
-		
+
 		final TypedArray styles = context.obtainStyledAttributes(attrs, R.styleable.FabView, 0, 0);
 		mFabAttachTo = styles.getResourceId(R.styleable.FabView_fabuless_attachTo, 0);
 		mFabAttachAt = styles.getInt(R.styleable.FabView_fabuless_attachAt, TOP_RIGHT);
@@ -100,33 +113,33 @@ public class FabView extends ImageView {
 		mFabAttachPadding = (int) styles.getDimension(R.styleable.FabView_fabuless_padding, 16 * density);
 		mFabRevealAfterMs = styles.getInteger(R.styleable.FabView_fabuless_revealAfterMs, -1);
 		styles.recycle();
-		
+
 		switch (mFabSize) {
 			case SMALL:
 				mShadowOffset = (int) (2 * density);
 				mFabRadius = (int) (20 * density);
 				break;
-				
+
 			case NORMAL: default:
 				mShadowOffset = (int) (3 * density);
 				mFabRadius = (int) (28 * density);
 				break;
 		}
-		
+
 		mBackgroundDrawable = new ShapeDrawable(new OvalShape());
-		
+
 		final Paint paint = mBackgroundDrawable.getPaint();
 		paint.setShadowLayer(mShadowOffset, 0f, 0f * density, 0x60000000);
 		paint.setColor(mBackgroundColor);
 		setLayerType(LAYER_TYPE_SOFTWARE, paint);
-		
+
 		mTouchSpotAnimator = new TouchSpotAnimator();
 		mFabRevealer = new FabRevealer();
-		if (mFabRevealAfterMs > -1) {
+		if (mFabRevealAfterMs > -1 && getVisibility() == VISIBLE) {
 			setVisibility(GONE);
 			getViewTreeObserver().addOnPreDrawListener(mFabRevealer);
 		}
-		
+
 	}
 
 	//-- overrides
@@ -282,7 +295,15 @@ public class FabView extends ImageView {
 		getViewTreeObserver().removeGlobalOnLayoutListener(mLayoutListener);
 		super.onDetachedFromWindow();
 	}
-	
+
+	public void setVisibleAnimated(boolean visible) {
+		if (visible) {
+			mFabRevealer.show(true);
+		} else {
+			mFabRevealer.hide(true);
+		}
+	}
+
 	//-- inner classes
 	
 	protected class FabRevealer implements Runnable, OnPreDrawListener {
@@ -290,20 +311,47 @@ public class FabView extends ImageView {
 		public void show(boolean animate) {
 			if (getVisibility() == VISIBLE) return;
 			if (animate) {
-				setScaleX(0);
-				setScaleY(0);
+				setScaleX(0f);
+				setScaleY(0f);
 				setVisibility(VISIBLE);
 				animate()
 					.setInterpolator(new AccelerateInterpolator())
 					.setDuration(300)
-					.scaleX(1)
-					.scaleY(1);
+					.scaleX(1f)
+					.scaleY(1f);
 				
 			} else {
 				setVisibility(VISIBLE);
 			}
 		}
-		
+
+		public void hide(boolean animate) {
+			if (getVisibility() != VISIBLE) return;
+
+			if (animate) {
+				animate()
+					.setInterpolator(new AccelerateInterpolator())
+					.setDuration(300)
+					.scaleX(0f)
+					.scaleY(0f)
+					.setListener(new AnimatorListener() {
+						@Override public void onAnimationStart(Animator animation) { }
+						@Override public void onAnimationRepeat(Animator animation) { }
+						@Override public void onAnimationCancel(Animator animation) { }
+
+						@Override
+						public void onAnimationEnd(Animator animation) {
+							setScaleX(1f);
+							setScaleY(1f);
+							setVisibility(INVISIBLE);
+						}
+					});
+
+			} else {
+				setVisibility(INVISIBLE);
+			}
+		}
+
 		//-- utility methods
 		
 		@Override
@@ -411,17 +459,17 @@ public class FabView extends ImageView {
 	//-- utility methods
 	
 	protected static int transformColor(int fromColor, int toColor, float factor) {
-		final float unfactor = 1f - factor;
-		final int alpha = (int) (unfactor * Color.alpha(fromColor) + factor * Color.alpha(toColor));  
-		final int red = (int) (unfactor * Color.red(fromColor) + factor * Color.red(toColor));
-		final int green = (int) (unfactor * Color.green(fromColor) + factor * Color.green(toColor));
-		final int blue = (int) (unfactor * Color.blue(fromColor) + factor * Color.blue(toColor));
+		final float defactor = 1f - factor;
+		final int alpha = (int) (defactor * Color.alpha(fromColor) + factor * Color.alpha(toColor));
+		final int red = (int) (defactor * Color.red(fromColor) + factor * Color.red(toColor));
+		final int green = (int) (defactor * Color.green(fromColor) + factor * Color.green(toColor));
+		final int blue = (int) (defactor * Color.blue(fromColor) + factor * Color.blue(toColor));
 		return Color.argb(alpha, red, green, blue);
 	}
 	
 	protected static int transformAlpha(int color, int fromAlpha, int toAlpha, float factor) {
-		final float unfactor = 1f - factor;
-		final int alpha = (int) (factor * fromAlpha + unfactor * toAlpha);
+		final float defactor = 1f - factor;
+		final int alpha = (int) (factor * fromAlpha + defactor * toAlpha);
 		return setAlpha(color, alpha);
 	}
 
