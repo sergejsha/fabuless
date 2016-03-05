@@ -136,7 +136,7 @@ public class FabView extends ImageView {
 		mTouchSpotAnimator = new TouchSpotAnimator();
 		mFabRevealer = new FabRevealer();
 		if (mFabRevealAfterMs > -1 && getVisibility() == VISIBLE) {
-			setVisibility(GONE);
+			setVisibility(INVISIBLE);
 			getViewTreeObserver().addOnPreDrawListener(mFabRevealer);
 		}
 
@@ -309,7 +309,10 @@ public class FabView extends ImageView {
 	protected class FabRevealer implements Runnable, OnPreDrawListener {
 
 		public void show(boolean animate) {
-			if (getVisibility() == VISIBLE) return;
+			if (getVisibility() == VISIBLE) {
+				return;
+			}
+
 			if (animate) {
 				setScaleX(0f);
 				setScaleY(0f);
@@ -325,8 +328,10 @@ public class FabView extends ImageView {
 			}
 		}
 
-		public void hide(boolean animate) {
-			if (getVisibility() != VISIBLE) return;
+		public void hide(final boolean animate) {
+			if (getVisibility() != VISIBLE) {
+				return;
+			}
 
 			if (animate) {
 				animate()
@@ -335,16 +340,16 @@ public class FabView extends ImageView {
 					.scaleX(0f)
 					.scaleY(0f)
 					.setListener(new AnimatorListener() {
-						@Override public void onAnimationStart(Animator animation) { }
-						@Override public void onAnimationRepeat(Animator animation) { }
-						@Override public void onAnimationCancel(Animator animation) { }
-
-						@Override
-						public void onAnimationEnd(Animator animation) {
+						@Override public void onAnimationEnd(Animator animation) {
 							setScaleX(1f);
 							setScaleY(1f);
 							setVisibility(INVISIBLE);
+							animate().setListener(null);
 						}
+
+						@Override public void onAnimationStart(Animator animation) { }
+						@Override public void onAnimationRepeat(Animator animation) { }
+						@Override public void onAnimationCancel(Animator animation) { }
 					});
 
 			} else {
