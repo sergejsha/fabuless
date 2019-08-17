@@ -39,7 +39,7 @@ Usage example
 	    android:background="@color/color1">
     
       <!--
-        This is yours target view with children (ommited for simplisity) 
+        This is yours target view with children (ommited for simplicity) 
         ... 
       -->
     
